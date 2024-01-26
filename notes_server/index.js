@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 //importing created routers;
 
 const authRouter = require('./routes/auth');
-
+const notesRouter = require('./routes/notes');
 
 //creating app
 const app = express();
@@ -44,6 +44,7 @@ connectToDB();
 //normal API;
 
 app.use("/api/auth",authRouter)
+app.use("/api/notes",notesRouter)
 //listing app on port 8000
 app.listen(8000,()=>{
     console.log('server is running on localhost:8000')

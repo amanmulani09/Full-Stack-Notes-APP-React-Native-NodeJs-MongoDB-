@@ -12,6 +12,12 @@ const notesSchema = mongoose.Schema({
         min:30,
         max:200,
         required:true
+    },
+    postedBy:{
+        type:String,
+        min:5,
+        max:30,
+        required:true
     }
 },
 {timestamps:true}
