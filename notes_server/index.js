@@ -9,23 +9,35 @@ const mongoose = require('mongoose');
 const app = express();
 
 //adding middlewares
-app.use(express(express.json));
+// app.use(express(express.json));
 app.use(morgan("common"));
 app.use(helmet());
 
 //mongoDB connection
-const DB_Url = process.env.MONGODB_URL;
-mongoose
-  .connect(DB_Url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("mongo db database connected");
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+const connectToDB = ()=>{
+  try{
+    const DB_Url = process.env.MONGODB_URL;
+    mongoose
+      .connect(DB_Url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .then(() => {
+        console.log("mongo db database connected");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }catch(error){
+      console.log('something went wrong...')
+  }
+
+}
+//util function to make connection with DB
+connectToDB();
+
+//normal API;
+
 
 //listing app on port 8000
 app.listen(8000,()=>{
