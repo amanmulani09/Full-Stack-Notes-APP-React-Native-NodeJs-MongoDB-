@@ -13,7 +13,6 @@ app.use(express(express.json));
 app.use(morgan("common"));
 app.use(helmet());
 
-
 //mongoDB connection
 const DB_Url = process.env.MONGODB_URL;
 mongoose
@@ -27,8 +26,6 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
-
-
 
 //listing app on port 8000
 app.listen(8000,()=>{
