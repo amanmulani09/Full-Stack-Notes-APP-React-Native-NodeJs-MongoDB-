@@ -5,11 +5,16 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 
+//importing created routers;
+
+const authRouter = require('./routes/auth');
+
+
 //creating app
 const app = express();
 
 //adding middlewares
-// app.use(express(express.json));
+app.use(express.json());
 app.use(morgan("common"));
 app.use(helmet());
 
@@ -38,7 +43,7 @@ connectToDB();
 
 //normal API;
 
-
+app.use("/api/auth",authRouter)
 //listing app on port 8000
 app.listen(8000,()=>{
     console.log('server is running on localhost:8000')
