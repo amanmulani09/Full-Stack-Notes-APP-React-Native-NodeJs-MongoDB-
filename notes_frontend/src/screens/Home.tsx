@@ -1,7 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
+import {StackNavigationProp} from '@react-navigation/stack'
 import React from 'react'
+import { RootStackParamList } from '../AppNavigator'
 
-const Home = () => {
+interface navProps{
+  navigation:StackNavigationProp<RootStackParamList,"Home">
+}
+
+const Home = ({navigation}:navProps) => {
   return (
     <View>
       <Text>Home</Text>

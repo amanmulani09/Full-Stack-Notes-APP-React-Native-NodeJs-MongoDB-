@@ -1,7 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
+import { RootStackParamList } from '../AppNavigator'
+import {StackNavigationProp} from '@react-navigation/stack'
 import React from 'react'
 
-const Signup = () => {
+interface navProps {
+  navigation:StackNavigationProp<RootStackParamList,"Signup">
+}
+
+const Signup = ({navigation}:navProps) => {
   return (
     <View>
       <Text>Signup</Text>
