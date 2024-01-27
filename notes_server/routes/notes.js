@@ -73,20 +73,19 @@ router.get('/getNotes/:currentUser',async(req,res)=>{
 
     try{
         const currentUser = await userSchema.findById(req.params.currentUser);
+        // console.log(currentUser)
         if(!currentUser){
+            // console.log('inside error ------')
             res.status(400).json({"message":"user not found",status:false})
         }
-    
         if(currentUser){
             const notes = await notesSchema.find({postedBy:req.params.currentUser});
-            res.send(200).json(notes);
+            res.status(200).json(notes);
         }
     }catch(error){
-        res.send(500).json(error)
+        res.status(500).json(error)
     }
     
-
-
 });
 
 

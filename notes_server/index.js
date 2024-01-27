@@ -1,9 +1,11 @@
 //importing packges and middlewares;
-require('dotenv').config()
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+
+//configuring env files
+require('dotenv').config()
 
 //importing created routers;
 
@@ -43,8 +45,8 @@ connectToDB();
 
 //normal API;
 
-app.use("/api/auth",authRouter)
-app.use("/api/notes",notesRouter)
+app.use("/auth",authRouter)
+app.use("/notes",notesRouter)
 //listing app on port 8000
 app.listen(8000,()=>{
     console.log('server is running on localhost:8000')
