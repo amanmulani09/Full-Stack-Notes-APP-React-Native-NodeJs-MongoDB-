@@ -8,7 +8,9 @@ import Home from './screens/Home';
 
 export type RootStackParamList = {
     Splash: undefined;
-    Login: undefined;
+    Login: {
+        id:string
+    };
     Signup: undefined;
     Home: undefined;
 }
@@ -29,7 +31,9 @@ const AppNavigator = () => {
                 headerShown:false
             }}
             />
-            <Stack.Screen name='Signup' component={Signup}/>
+            <Stack.Screen name='Signup' component={Signup}
+            options={{title:""}}
+            />
             <Stack.Screen name='Home' component={Home}
              options={{
                 headerShown:false

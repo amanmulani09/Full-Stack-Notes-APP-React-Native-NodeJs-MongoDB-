@@ -3,6 +3,7 @@ import {StackNavigationProp} from '@react-navigation/stack'
 import { RootStackParamList } from '../AppNavigator'
 import React, { useState } from 'react'
 import { TextInput } from 'react-native-gesture-handler'
+import Loader from '../Components/Loader'
 
 
 interface navProps {
@@ -13,7 +14,7 @@ const Login = ({navigation}:navProps) => {
   const [password,setPassword] = useState<string>('');
   const [invalidEmail,setInvaliEmail] = useState<boolean>(false);
   const [invalidPassword,setInvalidPassword] = useState<boolean>(false);
-
+  const [loading,setLoading] = useState<boolean>(false)
 
   const validate = ()=>{
     let valid = true;
@@ -37,6 +38,45 @@ const Login = ({navigation}:navProps) => {
     return valid;
 
   }
+  
+  const handleLogin = async()=>{
+    setLoading(true)
+    try{
+      const headers = new Headers();
+      headers.append('Content-Type',"application/json");
+      const body = {email:email,password:password};
+  
+      const res = await fetch('http://localhost:8000/auth/login',{
+        headers:headers,
+        method:'POST',
+        body:JSON.stringify(body)
+      });
+  
+      const data = await res.json();
+      // console.log(data);
+
+      setEmail('');
+      setPassword('')
+
+      if(data){
+        setLoading(false)
+        navigation.navigate('Home',{id:data._id})
+      }
+    }catch(error){
+      setLoading(false)
+      console.log('something went wrong');
+      setInvaliEmail(true);
+      setInvalidPassword(true);
+
+      setEmail('');
+      setPassword('')
+    }
+
+    
+
+    
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.headingText}>Welcome Back</Text>
@@ -53,14 +93,19 @@ const Login = ({navigation}:navProps) => {
       <TouchableOpacity style={styles.loginBtn} onPress={()=>{
         if(validate()){
           //hit a api call
+          handleLogin();
         }
       }}>
         <Text style={styles.loginBtnText}>Login</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity style={[styles.loginBtn,{backgroundColor:'white',borderWidth:1,borderColor:'black',marginTop:10}]}>
+      <TouchableOpacity style={[styles.loginBtn,{backgroundColor:'white',borderWidth:1,borderColor:'black',marginTop:10}]}
+      onPress={()=>{
+        navigation.navigate('Signup');
+      }}
+      >
         <Text style={[styles.loginBtnText,{color:'black'}]}>Create Account</Text>
       </TouchableOpacity>
+      <Loader visible={loading}/>
     </SafeAreaView>
   )
 }
