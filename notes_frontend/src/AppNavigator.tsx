@@ -8,11 +8,11 @@ import Home from './screens/Home';
 
 export type RootStackParamList = {
     Splash: undefined;
-    Login: {
+    Login: undefined;
+    Signup:undefined;
+    Home: {
         id:string
     };
-    Signup: undefined;
-    Home: undefined;
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
