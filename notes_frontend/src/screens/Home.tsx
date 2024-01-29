@@ -41,13 +41,12 @@ const Home = ({ navigation }: navProps) => {
 
   };
   const handleCreateNote  = ()=>{
-    navigation.navigate('AddNotes',{id:route.params.id})
+    navigation.navigate('AddNotes',{id:route.params.id,type:'New'})
   }
 
 
   const deleteNotes = async(id:string)=>{
     setLoading(true)
-    // console.log(id)
 
     try{
       const header = new Headers();
@@ -92,7 +91,7 @@ const Home = ({ navigation }: navProps) => {
 
                   <View>
                     <TouchableOpacity onPress={()=>{
-
+                           navigation.navigate('AddNotes',{id:route.params.id,type:'EDIT',data:item})
                     }}>
                       <Text style={{color:'green'}}>{'Edit'}</Text>
                     </TouchableOpacity>

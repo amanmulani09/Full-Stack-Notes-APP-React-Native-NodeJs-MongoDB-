@@ -15,7 +15,9 @@ export type RootStackParamList = {
         id:string
     };
     AddNotes:{
-        id:string
+        id:string,
+        type:string,
+        data:{}
     };
 }
 

@@ -6,8 +6,8 @@ import Loader from '../Components/Loader';
 const AddNotes = () => {
     const route = useRoute();
     const navigation = useNavigation();
-    const [title, setTitle] = useState<string>('');
-    const [description, setdescription] = useState<string>('');
+    const [title, setTitle] = useState<string>(route.params.type == "EDIT" ? route.params.data.title : '');
+    const [description, setdescription] = useState<string>(route.params.type == "EDIT" ? route.params.data.description : '');
     const [isInvalidTitle, setisInvalidTitle] = useState<boolean>(false);
     const [isInvalidDesc, setIsInvalidDesc] = useState<boolean>(false);
     const [loading,setLoading] = useState(false)
@@ -60,6 +60,31 @@ const AddNotes = () => {
 
     }
 
+    const updateNote = async () =>{
+        setLoading(true)
+        try{
+
+            const header = new Headers();
+            header.append('Content-Type','application/json');
+            const body = {title,description,postedBy:route.params.id};
+
+            const res = await fetch(`http://localhost:8000/notes/updateNotes/${route.params.data._id}`,{
+                headers:header,
+                method:'PUT',
+                body:JSON.stringify(body)
+            })
+            setLoading(false);
+            setTitle('');
+            setdescription('');
+            navigation.goBack();
+
+        }catch(error){
+            setLoading(false)
+            console.log(error)
+        }
+
+    }
+
     return (
         <View style={styles.container}>
             <TextInput
@@ -77,14 +102,28 @@ const AddNotes = () => {
             />
             {isInvalidDesc && <Text style={styles.invalidText}> please enter valid Desription </Text>}
 
-            <TouchableOpacity style={styles.btn} onPress={() => {
-                if (validate()) {
-                    handleAddNote()
-                }
-            }}>
-                <Text style={styles.btnText}>Add Note</Text>
-                <Loader visible={loading}/>
-            </TouchableOpacity>
+            {
+                route.params.type === "EDIT" ? (
+                    <TouchableOpacity style={styles.btn} onPress={() => {
+                        if (validate()) {
+                            updateNote()
+                        }
+                    }}>
+                        <Text style={styles.btnText}>Update Note</Text>
+                        <Loader visible={loading}/>
+                    </TouchableOpacity>
+                ):(
+                    <TouchableOpacity style={styles.btn} onPress={() => {
+                        if (validate()) {
+                            handleAddNote()
+                        }
+                    }}>
+                        <Text style={styles.btnText}>Add Note</Text>
+                        <Loader visible={loading}/>
+                    </TouchableOpacity>
+                )
+            }
+           
         </View>
     )
 }
