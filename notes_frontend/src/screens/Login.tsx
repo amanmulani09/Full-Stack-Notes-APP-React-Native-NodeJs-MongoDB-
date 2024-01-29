@@ -53,7 +53,6 @@ const Login = ({navigation}:navProps) => {
       });
   
       const data = await res.json();
-      // console.log(data);
 
       setEmail('');
       setPassword('')

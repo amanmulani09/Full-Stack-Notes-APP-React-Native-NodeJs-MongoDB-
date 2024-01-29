@@ -61,9 +61,7 @@ const Signup = ({navigation}:navProps) => {
         body:JSON.stringify(body)
       });
   
-      const data = await res.json();
-      console.log(data);
-      
+      const data = await res.json();      
 
       setEmail('');
       setPassword('');

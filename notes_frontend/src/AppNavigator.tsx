@@ -5,12 +5,16 @@ import Splash from './screens/Splash';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import Home from './screens/Home';
+import AddNotes from './screens/AddNotes';
 
 export type RootStackParamList = {
     Splash: undefined;
     Login: undefined;
     Signup:undefined;
     Home: {
+        id:string
+    };
+    AddNotes:{
         id:string
     };
 }
@@ -37,6 +41,12 @@ const AppNavigator = () => {
             <Stack.Screen name='Home' component={Home}
              options={{
                 headerShown:false
+            }}
+            />
+            <Stack.Screen name='AddNotes' component={AddNotes}
+             options={{
+                headerShown:true,
+                title:'Create New Node'
             }}
             />
         </Stack.Navigator>
