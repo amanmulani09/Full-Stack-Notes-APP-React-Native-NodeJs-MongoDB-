@@ -6,7 +6,6 @@ interface LoaderProps{
 }
 
 const Loader = ({visible}:LoaderProps) => {
-    console.log(visible)
   return (
     <>
     <Modal transparent visible={visible}>

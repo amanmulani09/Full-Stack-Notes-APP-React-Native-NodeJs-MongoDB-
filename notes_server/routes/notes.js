@@ -53,7 +53,7 @@ router.put('/updateNotes/:id',async(req,res)=>{
         if(!findNotes) res.status(400).json({"message":"notes doesn't exist"});
         
         if(findNotes){
-           const updatedNotes = await notesSchema.updateOne({
+           const updatedNotes = await notesSchema.findOneAndUpdate({_id:req.params.id},{
             title:req.body.title,
             description:req.body.description,
             postedBy:req.body.postedBy
