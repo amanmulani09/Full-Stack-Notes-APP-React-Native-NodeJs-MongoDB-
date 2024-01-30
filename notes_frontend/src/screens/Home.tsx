@@ -32,7 +32,7 @@ const Home = ({ navigation }: navProps) => {
     const header = new Headers();
     header.append('Content-Type', 'application/json');
 
-    const res = await fetch(`http://localhost:8000/notes/getNotes/${id}`, {
+    const res = await fetch(`https://notes-app-mern-react-native-server.vercel.app/notes/getNotes/${id}`, {
       headers: header
     });
     const data = await res.json();
@@ -52,7 +52,7 @@ const Home = ({ navigation }: navProps) => {
       const header = new Headers();
       header.append('Content-Type', 'application/json');
   
-      const res = await fetch(`http://localhost:8000/notes/deleteNotes/${id}`, {
+      const res = await fetch(`https://notes-app-mern-react-native-server.vercel.app/notes/deleteNotes/${id}`, {
         headers: header,
         method:'DELETE'
       });

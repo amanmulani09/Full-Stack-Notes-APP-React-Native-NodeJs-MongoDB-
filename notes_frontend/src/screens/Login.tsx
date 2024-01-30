@@ -46,7 +46,7 @@ const Login = ({navigation}:navProps) => {
       headers.append('Content-Type',"application/json");
       const body = {email:email,password:password};
   
-      const res = await fetch('http://localhost:8000/auth/login',{
+      const res = await fetch('https://notes-app-mern-react-native-server.vercel.app/auth/login',{
         headers:headers,
         method:'POST',
         body:JSON.stringify(body)

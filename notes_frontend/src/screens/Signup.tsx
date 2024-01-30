@@ -55,7 +55,7 @@ const Signup = ({navigation}:navProps) => {
       headers.append('Content-Type',"application/json");
       const body = {email:email,password:password,name:name};
   
-      const res = await fetch('http://localhost:8000/auth/register',{
+      const res = await fetch('https://notes-app-mern-react-native-server.vercel.app/auth/register',{
         headers:headers,
         method:'POST',
         body:JSON.stringify(body)

@@ -43,7 +43,7 @@ const AddNotes = () => {
         const body = {title,description,postedBy:route.params.id};
        
         try{
-            const res = await fetch('http://localhost:8000/notes/createNotes',{
+            const res = await fetch('https://notes-app-mern-react-native-server.vercel.app/notes/createNotes',{
                 headers:header,
                 method:'POST',
                 body:JSON.stringify(body)
@@ -68,7 +68,7 @@ const AddNotes = () => {
             header.append('Content-Type','application/json');
             const body = {title,description,postedBy:route.params.id};
 
-            const res = await fetch(`http://localhost:8000/notes/updateNotes/${route.params.data._id}`,{
+            const res = await fetch(`https://notes-app-mern-react-native-server.vercel.app/notes/updateNotes/${route.params.data._id}`,{
                 headers:header,
                 method:'PUT',
                 body:JSON.stringify(body)
